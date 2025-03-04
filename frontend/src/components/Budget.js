@@ -50,3 +50,6 @@ export const alongdata=[
 
     },
 ]
+
+
+export const prompt = `Generate travel plan for location :{location}, for {numberofdays} days for {alongwith} with {amountofmoney} budget , give me a hotels options list with hotel name, hotel address, price , hotel image url , geo coordinates , rating, descriptions and suggest itinerary with placename, place details , place image url , geo coordinates , ticket pricing , time to travel each of the location for 3 days with each day plan with best time to visite in json format `
