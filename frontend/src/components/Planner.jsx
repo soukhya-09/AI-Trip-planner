@@ -5,13 +5,14 @@ import { data,prompt , alongdata} from "./Budget";
 
 import { ToastContainer, toast } from 'react-toastify';
 import { chatSession } from "./Aimodel";
+
 const Planner = () => {
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [placeselected, setPlace] = useState("");
   const [placeid, setPlaceId] = useState("");
   const API_URL = "https://maps.gomaps.pro/maps/api/place/autocomplete/json";
-  const API_KEY = "AlzaSyfj6r7lIWccUAJsrJCuh8D2naaIy4WoptY"; 
+  const API_KEY = process.env.REACT_APP_API_KEY; 
 
 
   const [formdata, setdata] = useState({budget:"",along:"",time:""})
@@ -24,6 +25,12 @@ console.log(formdata);
   }
   const handlesubmit=async()=>{
       
+     const user = localStorage.getItem('user')
+     if(!user){
+      
+     }
+
+
       if(!formdata.budget || !formdata.along|| !formdata.time  || !placeselected){
         toast("Data incomplete")
       }
@@ -35,13 +42,10 @@ console.log(formdata);
   }
     
       else{
-        console.log(chatSession);
-        console.log(typeof chatSession.sendMessage); 
+       
         const final_prompt = prompt.replace('{location}',placeselected).replace('{alongwith}',formdata?.along).replace('{amountofmoney}',formdata?.budget).replace('{numberofdays}',formdata?.time)
-
-        console.log(final_prompt);
         const result = await chatSession.sendMessage(final_prompt);
-          console.log(result);
+        console.log(result?.response?.text());
       }
     
   }

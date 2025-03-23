@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { useContext } from 'react';
+import { PageContext, PageProvider } from './Pagecontext';
 const Home = () => {
+  const { currentPage, setCurrentPage } = useContext(PageContext); 
   return (
     <div className=' w-full p-3 border-t-4'>
         <h1 className=' text-center text-4xl text-red-500 pb-3 font-bold'>
@@ -13,7 +16,9 @@ const Home = () => {
       <div className=' w-full flex justify-center'>
 
    <Link to={"/planner"}>
-    <button className='  text-white bg-black rounded-2xl p-4   hover:bg-slate-400 hover:text-black'>
+    <button onClick={()=>{
+      setCurrentPage("planner")
+    }} className='  text-white bg-black rounded-2xl p-4   hover:bg-slate-400 hover:text-black'>
       Get Started, It's Free
       </button>
    </Link>  
