@@ -5,6 +5,7 @@ import { data,prompt , alongdata} from "./Budget";
 
 import { ToastContainer, toast } from 'react-toastify';
 import { chatSession } from "./Aimodel";
+import { useNavigate } from "react-router";
 
 const Planner = () => {
   const [input, setInput] = useState("");
@@ -14,7 +15,7 @@ const Planner = () => {
   const API_URL = "https://maps.gomaps.pro/maps/api/place/autocomplete/json";
   const API_KEY = process.env.REACT_APP_API_KEY; 
 
-
+const navigate = useNavigate()
   const [formdata, setdata] = useState({budget:"",along:"",time:""})
   function onchangedata(e){
 setdata({
@@ -27,7 +28,7 @@ console.log(formdata);
       
      const user = localStorage.getItem('user')
      if(!user){
-      
+       navigate("/signin")
      }
 
 

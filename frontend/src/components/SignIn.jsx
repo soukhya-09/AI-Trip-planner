@@ -5,23 +5,41 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { GoogleLogin , useGoogleLogin } from '@react-oauth/google';
+import {   useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
-
+  const navigate = useNavigate()
   const handleClickOpen = () => {
     setOpen(true);
   };
 const login = useGoogleLogin(
   {
-    onSuccess:(resp)=>{console.log(resp);},
+    onSuccess:(resp)=>{getuserdetails(resp)},
     onError:(error)=>{console.log(error);}
    
   }
 )
+
+const getuserdetails =(tokeninfo)=>{
+  axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokeninfo?.access_token}`
+  ,{headers:{
+            Authorization:`Bearer ${tokeninfo?.access_token}`,
+            Accept:"Application/json"
+  }}).then((resp)=>{console.log(resp);
+    localStorage.setItem('user',JSON.stringify(resp.data))
+    setOpen(false)
+    toast.success("Logged in ")
+    navigate("/planner")
+    window.location.reload()
+  })
+}
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -46,7 +64,7 @@ const login = useGoogleLogin(
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Sign In Here !!!!!!!!!"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
