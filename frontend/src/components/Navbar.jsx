@@ -8,6 +8,7 @@ const Navbar = () => {
   const user = JSON.parse(localStorage.getItem('user')); 
   const [isopen,setopen] = useState(true)
   const image = user?.picture ;
+  const image1 ="https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
   console.log(image);
   const deleteuser =()=>{
     localStorage.removeItem('user')
@@ -31,7 +32,7 @@ const Navbar = () => {
     <div className="w-[70%] flex flex-col items-center p-4">
     <img onClick={()=>{
       setopen(!isopen)
-    }} className="p-3 rounded-full" src={image} alt="jjajaj" />
+    }} className="p-3 rounded-full" src={image || image1} alt="Profile" />
     {isopen?(<></>):(<button onClick={deleteuser} className="p-1 border-2 border-gray-400 rounded-xl mt-2">
       Logout
     </button>)}
@@ -43,8 +44,8 @@ const Navbar = () => {
     <Link to={"/signin"}>
     <button
       onClick={() => {
-        setCurrentPage("signin");
-        toast.error("Please Login");
+        
+        toast("Please Login");
       }}
       className="text-white bg-black rounded-2xl p-2 h-[35%] hover:bg-slate-400 hover:text-black"
     >
