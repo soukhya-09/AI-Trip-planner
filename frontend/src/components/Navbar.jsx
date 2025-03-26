@@ -8,7 +8,7 @@ const Navbar = () => {
   const user = JSON.parse(localStorage.getItem('user')); 
   const [isopen,setopen] = useState(true)
   const image = user?.picture ;
-  const image1 ="https://www.pngmart.com/files/23/Profile-PNG-Photo.png"
+  
   console.log(image);
   const deleteuser =()=>{
     localStorage.removeItem('user')
@@ -32,7 +32,7 @@ const Navbar = () => {
     <div className="w-[70%] flex flex-col items-center p-4">
     <img onClick={()=>{
       setopen(!isopen)
-    }} className="p-3 rounded-full" src={image || image1} alt="Profile" />
+    }} className="p-3 rounded-full" src={image} alt="Profile" />
     {isopen?(<></>):(<button onClick={deleteuser} className="p-1 border-2 border-gray-400 rounded-xl mt-2">
       Logout
     </button>)}

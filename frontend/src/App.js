@@ -46,7 +46,7 @@ function MainApp() {
       </Routes>
 
       <div>
-       {path ==="planner"?(<></>): <GenerateRes/>}
+       {path !=="/planner"?(<></>): <GenerateRes/>}
       </div>
     </div>
   );

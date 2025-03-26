@@ -6,11 +6,13 @@ import { chatSession } from "./Aimodel";
 import { prompt } from "./Budget";
 import { setData } from '../Redux/dataSlice';
 
+import axios from 'axios';
 const GenerateRes = () => {
     const formData = useSelector((state) => state.form.formData);
     const navigate = useNavigate();
      const dispatch = useDispatch()
      const handleSubmit = async () => {
+     
         const user = localStorage.getItem('user');
         if (!user) {
             toast("Please Login Before Generating Trip");
@@ -27,8 +29,10 @@ const GenerateRes = () => {
             toast("Invalid time duration.");
             return;
         }
-    
+        navigate("/result")
         try {
+           
+           // const array = imagesresult.data.results[i].urls.full
             const final_prompt = prompt
                 .replace('{location}', formData.placeselected)
                 .replace('{alongwith}', formData.along)
@@ -44,7 +48,7 @@ const GenerateRes = () => {
             const tripData = JSON.parse(responseText); // 🚨 Ensure AI response is valid JSON
             
             dispatch(setData(tripData)); // ✅ Store structured data in Redux
-            navigate("/result");
+            
     
         } catch (error) {
             console.error("Error generating response:", error);
@@ -55,6 +59,7 @@ const GenerateRes = () => {
 
     return (
         <div className=' w-full flex justify-center pb-3 '>
+            
             <button
                 onClick={handleSubmit}
                 className='text-white bg-black rounded-2xl p-2 hover:bg-slate-400 hover:text-black'
