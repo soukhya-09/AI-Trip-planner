@@ -20,9 +20,9 @@ const TripDetails = () => {
         const imagesResult = await axios.get(url);
       
         setImages(imagesResult.data.results);
-       console.log(images);
+      
       } catch (error) {
-        console.error("Error fetching images:", error);
+        
       } finally {
         setLoad(false);
       }

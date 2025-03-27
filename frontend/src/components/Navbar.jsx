@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isopen,setopen] = useState(true)
   const image = user?.picture ;
   const random = user?.random
-  console.log(image);
+
   const deleteuser =()=>{
     localStorage.removeItem('user')
     window.location.reload()

@@ -41,9 +41,7 @@ const GenerateRes = () => {
     
             const result = await chatSession.sendMessage(final_prompt);
             const responseText = await result?.response?.text();
-            
-            console.log("AI Response:", responseText);
-    
+          
     
             const tripData = JSON.parse(responseText); 
             
