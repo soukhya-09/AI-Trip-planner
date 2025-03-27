@@ -31,8 +31,8 @@ const TripDetails = () => {
 
   // 
   const loc = formdata.placeselected.split(",")[0]
-  console.log( formdata.placeselected.split(",")[0]);
-  if (!tripData || !tripData.tripDetails || loc !== tripData.tripDetails.location ) {
+
+  if (!tripData || !tripData.tripDetails || loc.toLowerCase() !== tripData.tripDetails.location.split(",")[0].toLowerCase() ) {
     return (
       <div className="w-full flex justify-center">
         <div>
