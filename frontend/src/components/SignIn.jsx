@@ -43,6 +43,14 @@ const getuserdetails =(tokeninfo)=>{
   const handleClose = () => {
     setOpen(false);
   };
+  const setrandomuser = async () => {
+    let a = Math.floor(Math.random() * 100); 
+    const picture = `https://api.dicebear.com/9.x/adventurer/svg?seed=${a}`;
+    const name = `user_x${a}x`;
+    const random = true;
+    localStorage.setItem('user', JSON.stringify({ picture, name,random }));
+    navigate("/planner")
+};
 
   return (
     <React.Fragment>
@@ -53,10 +61,16 @@ const getuserdetails =(tokeninfo)=>{
    
       <h1 className=' p-3 lg:text-3xl md:text-2xl sm:text-xl text-emerald-600' >
         Sign in With Google
-      </h1>
+      </h1> 
+      <div className=' flex justify-center gap-3'>
+
       <Button variant="outlined" onClick={handleClickOpen}>
         Sign In
       </Button>
+      <Button variant="outlined" onClick={setrandomuser} >
+      Continue Without SignIn
+      </Button>
+      </div>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -76,6 +90,7 @@ const getuserdetails =(tokeninfo)=>{
           <Button onClick={login} autoFocus>
             SignIn
           </Button>
+          
         </DialogActions>
       </Dialog>
       </div>

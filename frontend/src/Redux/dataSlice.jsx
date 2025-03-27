@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: JSON.parse(localStorage.getItem("tripData")) || {}, // Load from localStorage
+  data: JSON.parse(localStorage.getItem("tripData")) || {}, 
 };
 
 const dataSlice = createSlice({
@@ -10,7 +10,7 @@ const dataSlice = createSlice({
   reducers: {
     setData: (state, action) => {
       state.data = action.payload;
-      localStorage.setItem("tripData", JSON.stringify(action.payload)); // Save to localStorage
+      localStorage.setItem("tripData", JSON.stringify(action.payload));
     },
   },
 });

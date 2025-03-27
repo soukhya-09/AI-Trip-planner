@@ -15,7 +15,7 @@ const GenerateRes = () => {
      
         const user = localStorage.getItem('user');
         if (!user) {
-            toast("Please Login Before Generating Trip");
+            toast.error("Please Login Before Generating Trip");
             navigate("/signin");
             return;
         }
@@ -44,10 +44,10 @@ const GenerateRes = () => {
             
             console.log("AI Response:", responseText);
     
-            // ✅ Parse response to JSON before dispatching
-            const tripData = JSON.parse(responseText); // 🚨 Ensure AI response is valid JSON
+    
+            const tripData = JSON.parse(responseText); 
             
-            dispatch(setData(tripData)); // ✅ Store structured data in Redux
+            dispatch(setData(tripData)); 
             
     
         } catch (error) {

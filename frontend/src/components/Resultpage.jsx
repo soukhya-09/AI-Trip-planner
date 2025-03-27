@@ -5,19 +5,20 @@ import axios from "axios";
 
 const TripDetails = () => {
   const tripData = useSelector((state) => state.data?.data);
+  const formdata = useSelector((state) => state.form?.formData);
   const [images, setImages] = useState([]); // Store images
   const [loader, setLoad] = useState(true);
   const apikey = "JKViSHXUr2uz2ae8DvEEfyjTyoiLoY3m8bn-yXUal30";
 
-  // ✅ Move useEffect to the top (before return)
+  
   useEffect(() => {
-    if (!tripData?.tripDetails) return; // Prevent running if no data
+    if (!tripData?.tripDetails) return; 
 
     const getImages = async () => {
       try {
         const url = `https://api.unsplash.com/search/photos?query=${tripData.tripDetails.location}&client_id=${apikey}`;
         const imagesResult = await axios.get(url);
-        setImages(imagesResult.data.results); // Store images in state
+        setImages(imagesResult.data.results); 
       } catch (error) {
         console.error("Error fetching images:", error);
       } finally {
@@ -26,10 +27,12 @@ const TripDetails = () => {
     };
 
     getImages();
-  }, [tripData]); // Runs only when tripData changes
+  }, [tripData]); 
 
-  // ✅ Now conditionally return (AFTER useEffect is defined)
-  if (!tripData || !tripData.tripDetails) {
+  // 
+  const loc = formdata.placeselected.split(",")[0]
+  console.log( formdata.placeselected.split(",")[0]);
+  if (!tripData || !tripData.tripDetails || loc !== tripData.tripDetails.location ) {
     return (
       <div className="w-full flex justify-center">
         <div>
