@@ -18,7 +18,9 @@ const TripDetails = () => {
       try {
         const url = `https://api.unsplash.com/search/photos?query=${tripData.tripDetails.location}&client_id=${apikey}`;
         const imagesResult = await axios.get(url);
-        setImages(imagesResult.data.results); 
+      
+        setImages(imagesResult.data.results);
+       console.log(images);
       } catch (error) {
         console.error("Error fetching images:", error);
       } finally {
@@ -62,7 +64,7 @@ const TripDetails = () => {
               {tripData.hotelOptions.map((hotel, index) => (
                 <div key={index} className="bg-white shadow-lg rounded-lg p-4">
                   <img
-                    src={images[index]?.urls?.full || "https://via.placeholder.com/300"}
+                    src={images[0+index]?.urls?.full }
                     alt={hotel.hotelName}
                     className="w-full h-48 object-cover rounded-lg"
                   />
@@ -76,7 +78,6 @@ const TripDetails = () => {
             </div>
           </div>
 
-          {/* ✅ Itinerary Section (Added Back) */}
           <div className="mt-8">
             <h2 className="text-2xl font-semibold text-blue-700 mb-4">Itinerary</h2>
             {Object.entries(tripData.itinerary).map(([day, details], index) => (
@@ -86,7 +87,7 @@ const TripDetails = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
                   {details.places.map((place, idx) => (
                     <div key={idx} className="bg-white shadow-md rounded-lg p-4">
-                      <img src={place.placeImageUrl} alt={place.placeName} className="w-full h-40 object-cover rounded-lg" />
+                      <img src={images[Math.floor(Math.random()*10)]?.urls?.full} alt={place.placeName} className="w-full h-40 object-cover rounded-lg" />
                       <h4 className="text-lg font-semibold mt-2">{place.placeName}</h4>
                       <p className="text-sm text-gray-600">{place.placeDetails}</p>
                       <p className="text-gray-800 font-bold">Entry Fee: {place.ticketPricing}</p>
