@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router";
@@ -22,9 +22,18 @@ const Planner = () => {
     placeselected:"",
     placeid:""
   });
+  useEffect(() => {
+    setFormDataState((prev) => ({
+      ...prev,
+      placeselected: input
+    }));
+  }, [input]);
+  
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
+    const updatedFormData = { ...formdata, placeselected: e.target.value };
+    setFormDataState(updatedFormData);
     fetchSuggestions(e.target.value);
   };
 
@@ -56,7 +65,7 @@ const Planner = () => {
     const updatedFormData = { ...formdata, placeselected: place.description ,placeid:place.place_id};
     setFormDataState(updatedFormData);
     dispatch(setFormData(updatedFormData)); 
-    console.log(place.description);
+   
     setSuggestions([]);
   };
 

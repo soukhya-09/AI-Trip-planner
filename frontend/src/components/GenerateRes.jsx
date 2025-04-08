@@ -21,7 +21,8 @@ const GenerateRes = () => {
         }
     
         if (!formData.budget || !formData.along || !formData.time || !formData.placeselected) {
-            toast("Data incomplete");
+            toast("Data incomplete please complete the input");
+            console.log(formData.budget,formData.along,formData.time,formData.placeselected);
             return;
         }
     
@@ -32,7 +33,7 @@ const GenerateRes = () => {
         navigate("/result")
         try {
            
-           // const array = imagesresult.data.results[i].urls.full
+           
             const final_prompt = prompt
                 .replace('{location}', formData.placeselected)
                 .replace('{alongwith}', formData.along)
